@@ -46,9 +46,9 @@ def binary_search(search_list, search_item):
 
 
 if __name__ == '__main__':
-    print(binary_search([x for x in range(100000)], 7))
-    print(simple_search([x for x in range(100000)], 7))
-    print(binary_search([x for x in range(100000)], 90000))
-    print(simple_search([x for x in range(100000)], 90000))
-    
+    binary_search([x for x in range(100000)], 7)
+    simple_search([x for x in range(100000)], 7)
+    binary_search([x for x in range(100000)], 90000)
+    simple_search([x for x in range(100000)], 90000)
+
     
