@@ -5,7 +5,7 @@
 # @Email   : chengyoufu@163.com
 # @File    : binary_search.py
 # @Software: PyCharm
-from src.common.time_utils import time_elapsed_deco
+from common.time_utils import time_elapsed_deco
 
 
 @time_elapsed_deco
