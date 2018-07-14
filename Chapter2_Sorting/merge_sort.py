@@ -123,7 +123,7 @@ def merge_sort_inner(to_sort_list):
     :param to_sort_list:
     :return:
     """
-    merge_sort_inner_impl(to_sort_list, 0, len(to_sort_list))
+    merge_sort_inner_impl(to_sort_list, 0, len(to_sort_list)-1)
 
 
 def merge_sort_inner_impl(to_sort_list, lo, hi):

@@ -8,6 +8,7 @@
 import random
 
 from Chapter2_Sorting.merge_sort import merge_sort_inner_with_insert
+from Chapter2_Sorting.quicksort import quick_sort
 from common.time_utils import time_elapsed_deco
 
 
@@ -85,22 +86,32 @@ def random_test():
 
 
 def large_file_test():
-    list_w = []
-    list_t = []
-    with open("../data/largeW.txt", 'r') as f:
-        for line in f.readlines():
-            list_w.append(line.strip())
-    with open("../data/largeT.txt", 'r') as f:
-        for line in f.readlines():
-            list_t.append(line.strip())
+    list_w = read_data("../data/largeW.txt")
+    list_t = read_data("../data/largeT.txt")
 
-    merge_sort_inner_with_insert(list_w, 0, len(list_w))
+    print('start sort')
+    quick_sort(list_w, 0, len(list_w) - 1)
     result_list = []
     for item in list_t:
+        print('start search')
         result = binary_search(list_w, item)
         if result == -1:
             result_list.append(item)
-    print(result_list)
+    write_to_file(result_list,"../data/result.txt")
+
+
+def write_to_file(data,file):
+    with open(file,'w') as f:
+        for item in data:
+            f.write(item)
+
+
+def read_data(file):
+    result_list = []
+    with open(file, 'r') as f:
+        for line in f.readlines():
+            result_list.append(line.strip())
+    return result_list
 
 
 if __name__ == '__main__':

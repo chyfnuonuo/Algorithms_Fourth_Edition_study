@@ -17,13 +17,13 @@ def shellsort(to_sort_list):
     while h < lenth // 3:
         h = 3 * h + 1
     while h >= 1:
-        index= h
+        index = h
         while index < lenth:
             jindex = index
             while jindex >= h and to_sort_list[jindex] < to_sort_list[jindex - h]:
                 exch(to_sort_list, jindex, jindex - h)
                 jindex -= h
-            index+=1
+            index += 1
         h = h // 3
     return to_sort_list
 
