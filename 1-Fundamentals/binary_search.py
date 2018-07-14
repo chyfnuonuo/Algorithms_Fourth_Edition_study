@@ -5,6 +5,8 @@
 # @Email   : chengyoufu@163.com
 # @File    : binary_search.py
 # @Software: PyCharm
+import random
+
 from common.time_utils import time_elapsed_deco
 
 
@@ -36,19 +38,46 @@ def binary_search(search_list, search_item):
     while start <= end:
         mid = (start + end) // 2
         guess = search_list[mid]
-        if guess == search_item:
-            return mid
-        if guess < search_item:
+        if guess > search_item:
+            end = mid - 1
+        elif guess < search_item:
             start = mid + 1
         else:
-            end = mid - 1
-    return None
+            return mid
+    return -1
+
+
+@time_elapsed_deco
+def binary_search_recursion(search_list, search_item):
+    """
+    递归方式实现二分查找
+    :param search_list:
+    :param search_item:
+    :return:
+    """
+    return search_impl(search_list, search_item, 0, len(search_list) - 1)
+
+
+def search_impl(search_list, search_item, start, end):
+    if start > end:
+        return -1
+    mid = (start + end) // 2
+    guess = search_list[mid]
+    if guess > search_item:
+        search_impl(search_list, search_item, start, mid - 1)
+    elif guess < search_item:
+        search_impl(search_list, search_item, mid + 1, end)
+    else:
+        return mid
 
 
 if __name__ == '__main__':
-    binary_search([x for x in range(100000)], 7)
-    simple_search([x for x in range(100000)], 7)
-    binary_search([x for x in range(100000)], 90000)
-    simple_search([x for x in range(100000)], 90000)
-
-    
+    # binary_search([x for x in range(100000)], 7)
+    # simple_search([x for x in range(100000)], 7)
+    # binary_search_recursion([x for x in range(100000)], 7)
+    # binary_search([x for x in range(100000)], 90000)
+    # simple_search([x for x in range(100000)], 90000)
+    for i in range(10):
+        simple_search([x for x in range(100000)], random.randint(0,100000))
+        binary_search([x for x in range(100000)], random.randint(0,100000))
+        binary_search_recursion([x for x in range(100000)], random.randint(0,100000))
