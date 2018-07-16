@@ -11,11 +11,15 @@ from common.time_utils import time_elapsed_deco
 
 
 @time_elapsed_deco
-def quick_sort(array, lo, hi):
+def quick_sort(array):
+    quick_sort_impl(array,0,len(array)-1)
+
+
+def quick_sort_impl(array, lo, hi):
     if lo < hi:
-        q = partition1(array, lo, hi)
-        quick_sort(array, lo, q - 1)
-        quick_sort(array, q + 1, hi)
+        q = partition(array, lo, hi)
+        quick_sort_impl(array, lo, q - 1)
+        quick_sort_impl(array, q + 1, hi)
 
 
 def partition(array, lo, hi):

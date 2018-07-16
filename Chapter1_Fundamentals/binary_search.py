@@ -7,7 +7,7 @@
 # @Software: PyCharm
 import random
 
-from Chapter2_Sorting.merge_sort import merge_sort_inner_with_insert
+
 from Chapter2_Sorting.quicksort import quick_sort
 from common.time_utils import time_elapsed_deco
 
@@ -90,12 +90,16 @@ def large_file_test():
     list_t = read_data("../data/largeT.txt")
 
     print('start sort')
-    quick_sort(list_w, 0, len(list_w) - 1)
+    # quick_sort_use_stack(list_w, 0, len(list_w) - 1)
+    quick_sort(list_w)
+    # list_w.sort()
     result_list = []
+    print('start search')
     for item in list_t:
-        print('start search')
+        print('search {0} start'.format(item))
         result = binary_search(list_w, item)
         if result == -1:
+            print('{0} not found'.format(item))
             result_list.append(item)
     write_to_file(result_list,"../data/result.txt")
 
@@ -104,6 +108,7 @@ def write_to_file(data,file):
     with open(file,'w') as f:
         for item in data:
             f.write(item)
+            f.write("\n")
 
 
 def read_data(file):

@@ -7,6 +7,7 @@ __mtime__ = '2018/5/13'
 __contact__ = 'chengyoufu@gmail.com'
 """
 from Chapter2_Sorting import insertsort
+from common.list_utils import get_random_list
 from common.time_utils import time_elapsed_deco
 
 
@@ -187,9 +188,9 @@ if __name__ == '__main__': 0
 # sort_list = [1, 3, 6, 7, 9, 2, 4, 7, 8, 10, 12]
 # inner_list_merge(sort_list, 0, 4, 9)
 # print(sort_list)
-sort_list = [1, 4, 2, 6, 3, 6, 9, 2, 1, 7, 9]
-merge_sort_inner_with_insert(sort_list, 0, 10)
-print(sort_list)
+src_list = get_random_list(start=0, end=100000, lenth=1000000)
+merge_sort(src_list)
+print(src_list)
 # subList1 = [1, 3, 6, 7, 9]
 # subList2 = [2, 4, 7, 8, 10, 12]
 # print(merge_tow_sublist(subList1, subList2))
