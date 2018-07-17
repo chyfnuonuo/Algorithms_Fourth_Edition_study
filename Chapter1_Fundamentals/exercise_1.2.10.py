@@ -1,0 +1,58 @@
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
+# @Time    : 2018/7/17 22:47
+# @Author  : leo cheng
+# @Email   : chengyoufu@163.com
+# @File    : exercise_1.2.10.py
+# @Software: PyCharm
+import threading
+
+
+class VisualCounter(object):
+
+    def __init__(self, counter_id, max_oper_times=0, max_value=10000):
+        self.__counter_id = counter_id
+        self.__counter = 0
+        self.__lock = threading.Lock()
+        self.__oper_times = 0
+        self.__max_oper_times = max_oper_times
+        self.__max_value = max_value
+
+    def reset_counter(self):
+        self.__counter = 0
+
+    @property
+    def counter(self):
+        return self.__counter
+
+    def counter_inc(self):
+        if self.__counter + 1 > self.__max_value:
+            raise ValueError("counter {0} is exceed limit {1}".format(self.__counter_id, self.__max_value))
+        if self.__max_oper_times != 0 and self.__oper_times + 1 > self.__max_oper_times:
+            raise ValueError("counter {0}'s operation times is exceed max limit:{1}".format(self.__counter_id,
+                                                                                            self.__max_oper_times))
+        with self.__lock:
+            self.__counter += 1
+            self.__oper_times += 1
+
+    def counter_dec(self):
+        if self.__counter < 0:
+            self.__counter += 1
+            raise ValueError("counter {0} is less than 0".format(self.__counter_id))
+        if self.__max_oper_times != 0 and self.__oper_times + 1 > self.__max_oper_times:
+            raise ValueError("counter {0}'s operation times is exceed max limit:{1}".format(self.__counter_id,
+                                                                                            self.__max_oper_times))
+        with self.__lock:
+            self.__counter -= 1
+            self.__oper_times += 1
+
+    def __str__(self):
+        return "Counter ID:{0}-->counter number is {1}".format(self.__counter_id, self.counter)
+
+    __repr__ = __str__
+
+
+if __name__ == '__main__':
+    pass
+
+
