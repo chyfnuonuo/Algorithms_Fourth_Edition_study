@@ -27,7 +27,7 @@ class Counter(object):
         with self.__lock:
             self.__counter += 1
         if self.__counter > self.__max_value:
-            raise ValueError("counter {0} is exceed limit {1}".format(self.counter, self.__max_value))
+            raise ValueError("counter {0} is exceed limit {1}".format(self.__counter_id, self.__max_value))
 
     def __str__(self):
         return "Counter ID:{0}-->counter number is {1}".format(self.__counter_id, self.counter)
