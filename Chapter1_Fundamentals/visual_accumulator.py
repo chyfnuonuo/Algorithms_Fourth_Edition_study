@@ -20,10 +20,9 @@ class VisualAccumulator(object):
 
     def show_fig(self):
         x = range(self.__data_num)
-
         plt.scatter(x, self.data_list)
         z = [sum(self.data_list) / self.__data_num] * self.__data_num
-        plt.plot(x, z, label="$meanx$", color="red", linewidth=2)
+        plt.plot(x, z, label="$mean value$", color="red", linewidth=2)
         plt.show()
 
     def add_data(self, data):
@@ -42,6 +41,6 @@ class VisualAccumulator(object):
 if __name__ == '__main__':
     accu = VisualAccumulator()
     for i in range(100):
-        accu.add_data(random.randint(0, 100))
+        accu.add_data(random.randint(0, random.randint(50,100)))
     print(accu.cal_mean())
     print(accu)
