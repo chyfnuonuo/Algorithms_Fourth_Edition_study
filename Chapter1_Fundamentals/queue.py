@@ -39,6 +39,13 @@ class QueueUseLink(object):
     def size(self):
         return len(self.__list)
 
+    def __iter__(self):
+        self.__data_list.__iter__()
+        return self
+
+    def __next__(self):
+        return self.__data_list.__next__()
+
 
 if __name__ == '__main__':
     pass

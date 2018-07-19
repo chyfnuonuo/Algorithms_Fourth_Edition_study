@@ -129,6 +129,7 @@ class LinkList(object):
 
     def reset_iter(self):
         self.__iter_node = self.__first_node
+        self.__iter_modify_flag = False
 
     def __next__(self):
         if self.__iter_modify_flag:

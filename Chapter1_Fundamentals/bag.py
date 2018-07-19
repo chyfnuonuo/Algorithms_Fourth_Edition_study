@@ -36,6 +36,18 @@ class BagUseLinkList(object):
     def __len__(self):
         return len(self.__data_list)
 
+    def __iter__(self):
+        self.__data_list.__iter__()
+        return self
+
+    def __next__(self):
+        return self.__data_list.__next__()
+
 
 if __name__ == '__main__':
-    pass
+    bag = BagUseLinkList()
+    bag.add(1)
+    bag.add(3)
+    bag.add(4)
+    for node in bag:
+        print(node)
