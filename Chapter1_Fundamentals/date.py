@@ -48,8 +48,20 @@ class Date(object):
 
     __repr__ = __str__
 
+    def __eq__(self, other):
+        if self == other:
+            return True
+        if other is None:
+            return False
+        if not isinstance(other, Date):
+            return False
+        if self.year != other.year or self.month != other.month or self.day != other.day:
+            return False
+        return True
+
 
 if __name__ == '__main__':
     date = Date(year=2017, month=12, day=24)
     print(date)
     date.month = 13
+
