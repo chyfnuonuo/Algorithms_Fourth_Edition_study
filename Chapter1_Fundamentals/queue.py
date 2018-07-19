@@ -31,7 +31,7 @@ class QueueUseLink(object):
         self.__list.append(Node(item))
 
     def dequeue(self):
-        return self.__list.pop()
+        return self.__list.pop().item_value
 
     def is_empty(self):
         return len(self.__list) == 0
