@@ -43,6 +43,11 @@ class LinkList(object):
 
     @type_check_deco(object,Node)
     def append(self, new_node):
+        """
+        尾部追加
+        :param new_node:
+        :return:
+        """
         if self.__first_node is None:
             self.__first_node = new_node
             self.__last_node = new_node
@@ -54,6 +59,11 @@ class LinkList(object):
 
     @type_check_deco(object, Node)
     def push(self, new_node):
+        """
+        头部追加
+        :param new_node:
+        :return:
+        """
         if self.__first_node is None:
             self.__first_node = new_node
             self.__last_node = new_node
@@ -64,7 +74,10 @@ class LinkList(object):
         self.__length += 1
 
     def pop(self):
-
+        """
+        弹出头部
+        :return:
+        """
         if self.__first_node is not None:
             temp = self.__first_node
             self.__first_node = self.__first_node.next_node
@@ -74,7 +87,6 @@ class LinkList(object):
             self.__iter_modify_flag = True
             return temp
         else:
-
             raise EOFError
 
     @type_check_deco(object, int,Node)
