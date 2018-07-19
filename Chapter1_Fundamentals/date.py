@@ -10,38 +10,46 @@
 class Date(object):
 
     def __init__(self, year=1900, month=1, day=1):
-        self.__month = month
         self.__year = year
-        self.__day = day
+        if month in [1, 3, 5, 7, 8, 10, 12]:
+            if 0 < day <= 31:
+                self.__month = month
+                self.__day = day
+            else:
+                raise ValueError("day value error")
+        elif month in [4, 6, 9, 11]:
+            if 0 < day <= 30:
+                self.__month = month
+                self.__day = day
+            else:
+                raise ValueError("day value error")
+        elif month == 2:
+            if year % 4 == 0 and year % 100 != 0 or year % 400 == 0:
+                if 0 < day <= 29:
+                    self.__month = month
+                    self.__day = day
+                else:
+                    raise ValueError("day value error")
+            else:
+                if 0 < day <= 28:
+                    self.__month = month
+                    self.__day = day
+                else:
+                    raise ValueError("day value error")
+        else:
+            raise ValueError("month value error")
 
     @property
     def year(self):
         return self.__year
 
-    @year.setter
-    def year(self, year):
-        if year < 0:
-            raise ValueError("year must bigger than 0")
-        self.__year = year
-
     @property
     def month(self):
         return self.__month
 
-    @month.setter
-    def month(self, month):
-        if month < 1 or month > 12:
-            raise ValueError("month must between 1 and 12")
-        self.__month = month
-
     @property
     def day(self):
         return self.__day
-
-    @day.setter
-    def day(self, day):
-        if day < 1 or day > 31:
-            raise ValueError("month must between 1 and 31")
 
     def __str__(self):
         return "{0}/{1}/{2}".format(self.month, self.day, self.year)
@@ -63,14 +71,4 @@ class Date(object):
 if __name__ == '__main__':
     date = Date(year=2017, month=12, day=24)
     print(date)
-    date.month = 12
-    assert date != None
-    assert date == date
-    assert date != "3"
-    assert date != []
-    date2 = date
-    assert date == date2
-    date3 = Date(year=2017, month=12, day=24)
-    assert date == date3
-    date3.month = 1
-    assert date != date3
+
