@@ -49,7 +49,7 @@ class Date(object):
     __repr__ = __str__
 
     def __eq__(self, other):
-        if self == other:
+        if self is other:
             return True
         if other is None:
             return False
@@ -63,5 +63,14 @@ class Date(object):
 if __name__ == '__main__':
     date = Date(year=2017, month=12, day=24)
     print(date)
-    date.month = 13
-
+    date.month = 12
+    assert date != None
+    assert date == date
+    assert date != "3"
+    assert date != []
+    date2 = date
+    assert date == date2
+    date3 = Date(year=2017, month=12, day=24)
+    assert date == date3
+    date3.month = 1
+    assert date != date3
