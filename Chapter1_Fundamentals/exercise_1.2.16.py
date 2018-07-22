@@ -5,6 +5,7 @@
 # @Email   : chengyoufu@163.com
 # @File    : exercise_1.2.16.py
 # @Software: PyCharm
+from math import gcd
 
 
 class Rational(object):
@@ -12,8 +13,10 @@ class Rational(object):
     def __init__(self, numerator, denominator):
         if denominator == 0:
             raise ZeroDivisionError("denominator can't be zero")
-        self.__numerator = numerator
-        self.__denominator = denominator
+        common_divisor = gcd(int(numerator), int(denominator))
+
+        self.__numerator = numerator / common_divisor
+        self.__denominator = denominator / common_divisor
 
     @property
     def numerator(self):
@@ -60,11 +63,22 @@ class Rational(object):
 
     __truediv__ = divides
 
-    def __str__(self):
-        return "{0}/{1}".format(self.numerator, self.denominator)
+    @staticmethod
+    def gcd(a, b):
+        # if a > b:
+        #     a, b = b, a
 
-    __repr__ = __str__
+        while a != 0:
+            a, b = b % a, a
 
+        return b
+
+
+def __str__(self):
+    return "{0}/{1}".format(self.numerator, self.denominator)
+
+
+__repr__ = __str__
 
 if __name__ == '__main__':
     num1 = Rational(-2, 3)
