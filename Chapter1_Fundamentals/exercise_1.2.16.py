@@ -32,6 +32,8 @@ class Rational(object):
             return self.__class__(self.numerator * other.denominator + other.numerator * self.denominator,
                                   self.denominator * other.denominator)
 
+    __add__ = plus
+
     def minus(self, other):
         if not isinstance(other, self.__class__):
             raise TypeError("parameter {0} must be {1}".format(other, self.__class__))
@@ -40,10 +42,14 @@ class Rational(object):
         return self.__class__(self.numerator * other.denominator - other.numerator * self.denominator,
                               self.denominator * other.denominator)
 
+    __sub__ = minus
+
     def times(self, other):
         if not isinstance(other, self.__class__):
             raise TypeError("parameter {0} must be {1}".format(other, self.__class__))
         return self.__class__(self.numerator * other.numerator, self.denominator * other.denominator)
+
+    __mul__ = times
 
     def divides(self, other):
         if not isinstance(other, self.__class__):
@@ -52,18 +58,12 @@ class Rational(object):
             raise ZeroDivisionError("denominator can't be zero")
         return self.__class__(self.numerator * other.denominator, self.denominator * other.numerator)
 
+    __truediv__ = divides
+
     def __str__(self):
         return "{0}/{1}".format(self.numerator, self.denominator)
 
     __repr__ = __str__
-
-    __add__ = plus
-
-    __sub__ = minus
-
-    __mul__ = times
-
-    __truediv__ = divides
 
 
 if __name__ == '__main__':
