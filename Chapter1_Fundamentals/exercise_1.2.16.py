@@ -57,6 +57,14 @@ class Rational(object):
 
     __repr__ = __str__
 
+    __add__ = plus
+
+    __sub__ = minus
+
+    __mul__ = times
+
+    __truediv__ = divides
+
 
 if __name__ == '__main__':
     num1 = Rational(-2, 3)
@@ -66,3 +74,7 @@ if __name__ == '__main__':
     print(num1.minus(num2))
     print(num1.times(num2))
     print(num1.divides(num2))
+    print(num1 + num2)
+    print(num1 - num2)
+    print(num1 * num2)
+    print(num1 / num2)
