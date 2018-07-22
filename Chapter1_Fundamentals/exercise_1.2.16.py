@@ -26,12 +26,17 @@ class Rational(object):
     def plus(self, other):
         if not isinstance(other, self.__class__):
             raise TypeError("parameter {0} must be {1}".format(other, self.__class__))
-        return self.__class__(self.numerator * other.denominator + other.numerator * self.denominator,
-                              self.denominator * other.denominator)
+        if self.denominator == other.denominator:
+            return self.__class__(self.numerator + other.numerator, self.denominator)
+        else:
+            return self.__class__(self.numerator * other.denominator + other.numerator * self.denominator,
+                                  self.denominator * other.denominator)
 
     def minus(self, other):
         if not isinstance(other, self.__class__):
             raise TypeError("parameter {0} must be {1}".format(other, self.__class__))
+        if self.denominator == other.denominator:
+            return self.__class__(self.numerator - other.numerator, self.denominator)
         return self.__class__(self.numerator * other.denominator - other.numerator * self.denominator,
                               self.denominator * other.denominator)
 
@@ -54,8 +59,8 @@ class Rational(object):
 
 
 if __name__ == '__main__':
-    num1 = Rational(2, 3)
-    num2 = Rational(1, 3)
+    num1 = Rational(-2, 3)
+    num2 = Rational(-1, 3)
     print(num1)
     print(num1.plus(num2))
     print(num1.minus(num2))
