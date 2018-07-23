@@ -13,10 +13,10 @@ class Rational(object):
     def __init__(self, numerator, denominator):
         if denominator == 0:
             raise ZeroDivisionError("denominator can't be zero")
-        common_divisor = gcd(int(numerator), int(denominator))
+        common_divisor = gcd(numerator, denominator)
 
-        self.__numerator = numerator / common_divisor
-        self.__denominator = denominator / common_divisor
+        self.__numerator = numerator // common_divisor
+        self.__denominator = denominator // common_divisor
 
     @property
     def numerator(self):
@@ -73,12 +73,11 @@ class Rational(object):
 
         return b
 
+    def __str__(self):
+        return "{0}/{1}".format(self.numerator, self.denominator)
 
-def __str__(self):
-    return "{0}/{1}".format(self.numerator, self.denominator)
+    __repr__ = __str__
 
-
-__repr__ = __str__
 
 if __name__ == '__main__':
     num1 = Rational(-2, 3)
