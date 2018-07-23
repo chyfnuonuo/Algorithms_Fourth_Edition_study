@@ -16,7 +16,7 @@ class Stack(object):
         self.__list.push(Node(item))
 
     def pop(self):
-        self.__list.pop().item_value
+        return self.__list.pop().item_value
 
     def is_empty(self):
         return len(self.__list) == 0

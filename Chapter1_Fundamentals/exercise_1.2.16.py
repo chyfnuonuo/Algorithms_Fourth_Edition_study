@@ -63,7 +63,6 @@ class Rational(object):
 
     __truediv__ = divides
 
-
     def __str__(self):
         return "{0}/{1}".format(self.numerator, self.denominator)
 
