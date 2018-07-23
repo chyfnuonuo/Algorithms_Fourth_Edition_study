@@ -63,15 +63,6 @@ class Rational(object):
 
     __truediv__ = divides
 
-    @staticmethod
-    def gcd(a, b):
-        # if a > b:
-        #     a, b = b, a
-
-        while a != 0:
-            a, b = b % a, a
-
-        return b
 
     def __str__(self):
         return "{0}/{1}".format(self.numerator, self.denominator)
