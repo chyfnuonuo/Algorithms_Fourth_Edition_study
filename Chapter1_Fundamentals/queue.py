@@ -40,11 +40,11 @@ class QueueUseLink(object):
         return len(self.__list)
 
     def __iter__(self):
-        self.__data_list.__iter__()
+        self.__list.__iter__()
         return self
 
     def __next__(self):
-        return self.__data_list.__next__()
+        return self.__list.__next__().item_value
 
 
 if __name__ == '__main__':
