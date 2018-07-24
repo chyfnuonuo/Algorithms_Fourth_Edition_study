@@ -18,6 +18,9 @@ class Stack(object):
     def pop(self):
         return self.__list.pop().item_value
 
+    def peek(self): # add exercise 1.3.7
+        return self.__list[0].item_value
+
     def is_empty(self):
         return len(self.__list) == 0
 
@@ -33,4 +36,7 @@ class Stack(object):
 
 
 if __name__ == '__main__':
-    pass
+    stack = Stack()
+    stack.push(1)
+    stack.push(2)
+    print(stack.peek())
