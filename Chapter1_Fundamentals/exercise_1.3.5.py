@@ -5,7 +5,7 @@
 # @Email   : chengyoufu@163.com
 # @File    : exercise_1.3.5.py
 # @Software: PyCharm
-from basic.datastructure.link_list_demo import LinkList, Node
+from Chapter1_Fundamentals.link_list import LinkList, Node
 
 
 def convert_binary(num):
