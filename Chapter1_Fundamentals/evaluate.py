@@ -7,11 +7,27 @@
 # @Software: PyCharm
 from Chapter1_Fundamentals.stack import Stack
 
+def spit_num(expr):
+    result_list = []
+    temp = ''
+    for item in expr:
+
+        if item in ('0', '1', '2', '3', '4', '5', '6', '7', '8', '9'):
+            temp += item
+        else:
+            if len(temp) != 0:
+                result_list.append(temp)
+                temp = ''
+            result_list.append(item)
+
+    return result_list
+
 
 def evaluate(expr):
     oper_satck = Stack()
     vals_stack = Stack()
-    for item in expr:
+    expr_list = spit_num(expr)
+    for item in expr_list:
         if item == "(":
             continue
         elif item in ['+', '-', '*', '/']:
@@ -36,5 +52,5 @@ def evaluate(expr):
 
 
 if __name__ == '__main__':
-    print(evaluate("(1+1)"))
+    print(evaluate("(1+11)"))
     print(evaluate("(((1+1)+((3*2)-4)/2)"))
