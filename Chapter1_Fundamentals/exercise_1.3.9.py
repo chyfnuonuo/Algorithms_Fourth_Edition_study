@@ -8,9 +8,26 @@
 from Chapter1_Fundamentals.stack import Stack
 
 
+def spit_num(expr):
+    result_list = []
+    temp = ''
+    for item in expr:
+
+        if item in ('0', '1', '2', '3', '4', '5', '6', '7', '8', '9'):
+            temp += item
+        else:
+            if len(temp) != 0:
+                result_list.append(temp)
+                temp = ''
+            result_list.append(item)
+
+    return result_list
+
+
 def parentheses(expr):
     stack = Stack()
-    for item in expr:
+    expr_list = spit_num(expr)
+    for item in expr_list:
         if item == ')':
             num1 = stack.pop()
             oper = stack.pop()
@@ -23,4 +40,5 @@ def parentheses(expr):
 
 
 if __name__ == '__main__':
-    print(parentheses('1+3)*2-1))'))
+    print(parentheses('1+33)*21-1))'))
+
