@@ -47,7 +47,7 @@ def is_num(item):
     return True
 
 
-def infix_to_postfix(expr):
+def infix_to_prefix(expr):
     expr = spit_num(expr)[::-1]
     stack = Stack()
     result_list = []
@@ -71,8 +71,8 @@ def infix_to_postfix(expr):
             stack.pop()
     while not stack.is_empty():
         result_list.append(stack.pop())
-    return ''.join(result_list[::-1])
+    return ' '.join(result_list[::-1])
 
 
 if __name__ == '__main__':
-    print(infix_to_postfix('(1+2)*3-3/1'))
+    print(infix_to_prefix('(31+21)*33-31/17'))
