@@ -20,7 +20,8 @@ def spit_num(expr):
                 result_list.append(temp)
                 temp = ''
             result_list.append(item)
-
+    if len(temp) != 0:
+        result_list.append(temp)
     return result_list
 
 
