@@ -74,5 +74,30 @@ def infix_to_prefix(expr):
     return ' '.join(result_list[::-1])
 
 
+def infix_to_postfix(expr):
+    """
+    infix convert to postfix
+    :param expr: infix expression
+    :return: postfix expression
+    Example:
+    >>> infix_to_postfix('(31+21)*33-31/17')
+    31 21 + 33 * 31 17 / -
+    """
+    expr = spit_num(expr)
+    stack = Stack()
+    result_list = []
+    for item in expr:
+        if is_num(item):
+            result_list.append(item)
+        elif is_operator(item):
+            while True:
+                if stack.is_empty() or stack.peek() == '(' or cmp_priority(item, stack.peek()) >= 0:
+                    stack.push()
+                    break
+                result_list.append(stack.pop())
+        else:
+
+
+
 if __name__ == '__main__':
     print(infix_to_prefix('(31+21)*33-31/17'))
