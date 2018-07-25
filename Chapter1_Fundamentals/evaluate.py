@@ -7,6 +7,7 @@
 # @Software: PyCharm
 from Chapter1_Fundamentals.stack import Stack
 
+
 def spit_num(expr):
     result_list = []
     temp = ''

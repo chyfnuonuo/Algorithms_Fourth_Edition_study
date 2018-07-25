@@ -8,30 +8,71 @@
 from Chapter1_Fundamentals.stack import Stack
 
 
-def cmp_high_priority(item, param):
-    pass
+def spit_num(expr):
+    result_list = []
+    temp = ''
+    for item in expr:
+
+        if item in ('0', '1', '2', '3', '4', '5', '6', '7', '8', '9'):
+            temp += item
+        else:
+            if len(temp) != 0:
+                result_list.append(temp)
+                temp = ''
+            result_list.append(item)
+    if len(temp) != 0:
+        result_list.append(temp)
+    return result_list
+
+
+def is_operator(item):
+    if item in ('+', '-', '*', '/'):
+        return True
+    return False
+
+
+def cmp_priority(item, param):
+    if item in ('*', '/'):
+        return True
+    else:
+        if param in ('*', '/'):
+            return False
+        else:
+            return True
+
+
+def is_num(item):
+    if item in ('+', '-', '*', '/', '(', ')'):
+        return False
+    return True
 
 
 def infix_to_postfix(expr):
-    expr = expr[::-1]
+    expr = spit_num(expr)[::-1]
     stack = Stack()
-    result = ''
+    result_list = []
     for item in expr:
-        if item in ('0','1','2','3','4','5','6','7','8','9'):
-            result = result+item
+        if is_num(item):
+            result_list.append(item)
         elif item == ')':
             stack.push(item)
-        elif item in ('*','/','+','-'):
-            while stack
-            if stack.is_empty() or stack.peek()==')' or cmp_high_priority(item,stack.peek())>0:
+        elif is_operator(item):
+            if stack.is_empty() or stack.peek() == ')' or cmp_priority(item, stack.peek()) > 0:
                 stack.push(item)
-
-            elif
-
-
+            else:
+                while True:
+                    result_list.append(stack.pop())
+                    if stack.is_empty() or stack.peek() == ')' or cmp_priority(item, stack.peek()) > 0:
+                        stack.push(item)
+                        break
+        else:
+            while stack.peek() != ')':
+                result_list.append(stack.pop())
+            stack.pop()
+    while not stack.is_empty():
+        result_list.append(stack.pop())
+    return ''.join(result_list[::-1])
 
 
 if __name__ == '__main__':
-    pass
-    
-    
+    print(infix_to_postfix('(1+2)*3-3/1'))
