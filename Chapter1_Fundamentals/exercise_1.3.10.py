@@ -91,13 +91,23 @@ def infix_to_postfix(expr):
             result_list.append(item)
         elif is_operator(item):
             while True:
-                if stack.is_empty() or stack.peek() == '(' or cmp_priority(item, stack.peek()) >= 0:
-                    stack.push()
+                if stack.is_empty() or stack.peek() == '(' or cmp_priority(item, stack.peek()):
+                    stack.push(item)
                     break
                 result_list.append(stack.pop())
+        elif item == '(':
+            stack.push(item)
+        elif item == ')':
+            while stack.peek() != '(':
+                result_list.append(stack.pop())
+            stack.pop()
         else:
-
+            raise ValueError
+    while not stack.is_empty():
+        result_list.append(stack.pop())
+    return ' '.join(result_list)
 
 
 if __name__ == '__main__':
     print(infix_to_prefix('(31+21)*33-31/17'))
+    print(infix_to_postfix('(31+21)*33-31/17'))
