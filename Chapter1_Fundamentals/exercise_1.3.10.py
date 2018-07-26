@@ -5,6 +5,7 @@
 # @Email   : chengyoufu@163.com
 # @File    : exercise_1.3.10.py
 # @Software: PyCharm
+
 from Chapter1_Fundamentals.stack import Stack
 
 
@@ -13,7 +14,7 @@ def spit_num(expr):
     temp = ''
     for item in expr:
 
-        if item in ('0', '1', '2', '3', '4', '5', '6', '7', '8', '9'):
+        if item.isdigit() or item == '.':
             temp += item
         else:
             if len(temp) != 0:
@@ -23,6 +24,20 @@ def spit_num(expr):
     if len(temp) != 0:
         result_list.append(temp)
     return result_list
+
+
+def is_num(item):
+    if item.isdigit():
+        result = True
+    else:
+        try:
+            float(item)
+        except ValueError:
+            result = False
+        else:
+            result = True
+
+    return result
 
 
 def is_operator(item):
@@ -39,12 +54,6 @@ def cmp_priority(item, param):
             return False
         else:
             return True
-
-
-def is_num(item):
-    if item in ('+', '-', '*', '/', '(', ')'):
-        return False
-    return True
 
 
 def infix_to_prefix(expr):
@@ -109,5 +118,5 @@ def infix_to_postfix(expr):
 
 
 if __name__ == '__main__':
-    print(infix_to_prefix('(31+21)*33-31/17'))
-    print(infix_to_postfix('(31+21)*33-31/17'))
+    print(infix_to_prefix('(3.1+21)*33-31/17'))
+    print(infix_to_postfix('(31+21)*33-0.31/17'))
