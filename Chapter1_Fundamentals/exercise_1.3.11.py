@@ -8,6 +8,20 @@
 from Chapter1_Fundamentals.stack import Stack
 
 
+def is_num(item):
+    if item.isdigit():
+        result = True
+    else:
+        try:
+            float(item)
+        except ValueError:
+            result = False
+        else:
+            result = True
+
+    return result
+
+
 def spit_num(expr):
     result_list = []
     temp = ''
@@ -19,19 +33,42 @@ def spit_num(expr):
             if len(temp) != 0:
                 result_list.append(temp)
                 temp = ''
-            result_list.append(item)
+            if item != ' ':
+                result_list.append(item)
     if len(temp) != 0:
         result_list.append(temp)
     return result_list
+
+
+def is_operator(item):
+    if item in ('+', '-', '*', '/'):
+        return True
+    return False
 
 
 def evaluate_postfix(expr):
     expr_list = spit_num(expr)
     stack = Stack()
     for item in expr_list:
+        if is_num(item):
+            stack.push(item)
+        elif is_operator(item):
+            if item == '+':
+                stack.push(float(stack.pop()) + float(stack.pop()))
+            elif item == '-':
+                subtrahend = stack.pop()
+                minuend = stack.pop()
+                stack.push(float(minuend) - float(subtrahend))
+            elif item == '*':
+                stack.push(float(stack.pop()) * float(stack.pop()))
+            else:
+                divisor = stack.pop()
+                dividend = stack.pop()
+                stack.push(float(dividend) / float(divisor))
+        else:
+            raise ValueError
+    return stack.pop()
 
 
 if __name__ == '__main__':
-    pass
-    
-    
+    print(evaluate_postfix('1 1 + 1 * 1 2 / -'))

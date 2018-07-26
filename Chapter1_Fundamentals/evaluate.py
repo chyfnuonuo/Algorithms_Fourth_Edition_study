@@ -13,7 +13,7 @@ def spit_num(expr):
     temp = ''
     for item in expr:
 
-        if item in ('0', '1', '2', '3', '4', '5', '6', '7', '8', '9'):
+        if item.isdigit() or item == '.':
             temp += item
         else:
             if len(temp) != 0:
