@@ -158,7 +158,7 @@ class LinkList(object):
         return new_link_list
 
     @type_check_deco(object,int)
-    def __delitem__(self, item_index):
+    def __delitem__(self, item_index): # exercise 1.3.20
         if item_index >= self.__length:
             raise IndexError("index {0} is out of range:[0:{1}]".format(item_index, self.__length - 1))
         result_node = self.__first_node
