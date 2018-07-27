@@ -13,10 +13,9 @@ def max(node):
     if node.next_node is None:
         return result
     temp = max(node.next_node)
-    if result > temp:
-        return result
-    else:
-        return temp
+    if result < temp:
+        result = temp
+    return result
 
 
 if __name__ == '__main__':
