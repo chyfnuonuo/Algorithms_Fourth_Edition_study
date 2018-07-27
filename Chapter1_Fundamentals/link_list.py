@@ -5,8 +5,9 @@
 # @Email   : chengyoufu@163.com
 # @File    : link_list_demo.py
 # @Software: PyCharm
-from common.func_utils import type_check_deco
 from copy import deepcopy
+
+from common.func_utils import type_check_deco
 
 
 class Node(object):
@@ -25,7 +26,7 @@ class Node(object):
 
     @next_node.setter
     def next_node(self, next_node):
-        if not isinstance(next_node, Node):
+        if next_node is not None and not isinstance(next_node, Node):
             raise TypeError
         self.__next_node = next_node
 
@@ -41,7 +42,7 @@ class LinkList(object):
     def is_empty(self):
         return self.__first_node is None
 
-    @type_check_deco(object,Node)
+    @type_check_deco(object, Node)
     def append(self, new_node):
         """
         尾部追加
@@ -87,7 +88,7 @@ class LinkList(object):
         else:
             raise EOFError
 
-    @type_check_deco(object, int,Node)
+    @type_check_deco(object, int, Node)
     def insert(self, item_index, new_node):
         if item_index == self.__length - 1:
             self.append(new_node)
@@ -112,6 +113,13 @@ class LinkList(object):
                 temp_node.next_node = temp_node.next_node.next_node
             self.__length -= 1
             self.__iter_modify_flag = True
+
+    def remove_after(self, item_index): # add exercise 1.3.24
+        node = self.__getitem__(item_index)
+        node.next_node = None
+        self.__last_node = node
+        self.__length = item_index + 1
+        self.__iter_modify_flag = True
 
     def extend(self, other_link_list):
         if not isinstance(other_link_list, LinkList):
@@ -155,8 +163,8 @@ class LinkList(object):
             new_link_list.append(deepcopy(temp_node, memodict))
         return new_link_list
 
-    @type_check_deco(object,int)
-    def __delitem__(self, item_index): # exercise 1.3.20
+    @type_check_deco(object, int)
+    def __delitem__(self, item_index):  # exercise 1.3.20
         if item_index >= self.__length:
             raise IndexError("index {0} is out of range:[0:{1}]".format(item_index, self.__length - 1))
         result_node = self.__first_node
@@ -167,7 +175,7 @@ class LinkList(object):
         result_node.next_node = result_node.next_node.next_node
         self.__length -= 1
 
-    @type_check_deco(object, int,Node)
+    @type_check_deco(object, int, Node)
     def __setitem__(self, item_index, new_node):
         if item_index >= self.__length:
             item_index = self.__length
@@ -199,13 +207,14 @@ if __name__ == '__main__':
     node3 = Node(3)
     link_list = LinkList()
     link_list2 = LinkList()
-    link_list2.append(1)
+    # link_list2.append(1)
     link_list.append(node1)
     link_list.append(node2)
     link_list.append(node3)
-    list_temp = link_list+link_list2
-    for node in list_temp:
-        print(node.item_value)
+    link_list.remove(2)
+    # list_temp = link_list+link_list2
+    # for node in list_temp:
+    #     print(node.item_value)
     # for node in link_list:
     #     link_list.pop()
     #     link_list.pop()
