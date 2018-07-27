@@ -64,12 +64,10 @@ class LinkList(object):
         :param new_node:
         :return:
         """
-        if self.__first_node is None:
-            self.__first_node = new_node
+        new_node.next_node = self.__first_node
+        self.__first_node = new_node
+        if new_node.next_node is None:
             self.__last_node = new_node
-        else:
-            new_node.next_node = self.__first_node
-            self.__first_node = new_node
         self.__iter_modify_flag = True
         self.__length += 1
 
