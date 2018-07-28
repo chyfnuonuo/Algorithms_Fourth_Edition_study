@@ -13,6 +13,7 @@ class CircleList(object):
 
     def __init__(self):
         self.__last_node = None
+        self.__iter_node = self.__last_node
 
     def is_empty(self):
         return self.__last_node is None
@@ -39,6 +40,25 @@ class CircleList(object):
         else:
             raise EOFError
 
+    def __iter__(self):
+        if self.__last_node is None:
+            raise EOFError
+        self.__iter_node = self.__last_node.next_node
+        return self
+
+    def __next__(self):
+
+        if self.__iter_node is None:
+            raise StopIteration
+        elif self.__iter_node != self.__last_node:
+            result = self.__iter_node
+            self.__iter_node = self.__iter_node.next_node
+
+        else:
+            result = self.__iter_node
+            self.__iter_node = None
+        return result
+
 
 if __name__ == '__main__':
     circle_list = CircleList()
@@ -50,3 +70,7 @@ if __name__ == '__main__':
     print(circle_list.dequeue().item_value)
     print(circle_list.dequeue().item_value)
     print(circle_list.dequeue().item_value)
+    for item_node in circle_list:
+        print(item_node.item_value)
+    for item_node in circle_list:
+        print(item_node.item_value)
