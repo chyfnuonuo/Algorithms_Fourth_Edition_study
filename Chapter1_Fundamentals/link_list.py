@@ -39,6 +39,14 @@ class LinkList(object):
         self.__iter_node = self.__first_node
         self.__iter_modify_flag = False
 
+    @property
+    def first_node(self):
+        return self.first_node
+
+    @property
+    def last_node(self):
+        return self.last_node
+
     def is_empty(self):
         return self.__first_node is None
 
@@ -80,6 +88,7 @@ class LinkList(object):
         if self.__first_node is not None:
             temp = self.__first_node
             self.__first_node = self.__first_node.next_node
+            temp.next_node = None
             self.__length -= 1
             if self.__first_node is None:
                 self.__last_node = None
