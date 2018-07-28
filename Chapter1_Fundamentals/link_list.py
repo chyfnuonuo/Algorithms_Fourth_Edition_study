@@ -105,7 +105,7 @@ class LinkList(object):
             self.push(new_node)
         else:
             temp_node = self.__getitem__(item_index)
-            temp_node.next_node, node.next_node = new_node, temp_node.next_node.next_node
+            temp_node.next_node, new_node.next_node = new_node, temp_node.next_node.next_node
             self.__length += 1
             self.__iter_modify_flag = True
 
@@ -117,7 +117,7 @@ class LinkList(object):
             temp_node = self.__getitem__(item_index - 1)
             if temp_node.next_node.next_node is None:
                 temp_node.next_node = None
-                self.__last_node = None
+                self.__last_node = temp_node
             else:
                 temp_node.next_node = temp_node.next_node.next_node
             self.__length -= 1
