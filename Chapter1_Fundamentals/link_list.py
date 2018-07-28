@@ -119,7 +119,10 @@ class LinkList(object):
                 temp_node.next_node = None
                 self.__last_node = temp_node
             else:
+                remove_node = temp_node.next_node
                 temp_node.next_node = temp_node.next_node.next_node
+                remove_node.next_node = None
+
             self.__length -= 1
             self.__iter_modify_flag = True
 
