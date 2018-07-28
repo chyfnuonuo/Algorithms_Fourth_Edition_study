@@ -46,10 +46,18 @@ class DoubleList(object):
         self.__last_node = None
         self.__length = 0
 
+    @property
+    def first_node(self):
+        return self.__first_node
+
+    @property
+    def last_node(self):
+        return self.__last_node
+
     def is_empty(self):
         return self.__first_node is None
 
-    def append(self,new_node):
+    def append(self, new_node):
         if self.__first_node is None:
             self.__first_node.next_node = new_node
             self.__last_node = new_node
@@ -57,10 +65,9 @@ class DoubleList(object):
             self.__last_node.next_node = new_node
             new_node.pre_node = self.__last_node
             self.__last_node = new_node
-        self.__length+=1
+        self.__length += 1
 
-
-    def push(self,new_node):
+    def push(self, new_node):
         if self.__first_node is None:
             self.__first_node = new_node
             self.__last_node = new_node
@@ -68,7 +75,7 @@ class DoubleList(object):
             self.__first_node.pre_node = new_node
             new_node.next_node = self.__first_node
             self.__first_node = new_node
-        self.__length+=1
+        self.__length += 1
 
     def pop(self):
         if self.__first_node is None:
@@ -77,7 +84,44 @@ class DoubleList(object):
             result = self.__first_node
             self.__first_node = self.__first_node.next_node
             self.__first_node.pre_node = None
+            result.next_node = None
+        self.__length -= 1
+        return result
 
+    def insert(self, item_index, new_node):
+        if item_index == 0:
+            self.push(new_node)
+        elif item_index == self.__length - 1:
+            self.append(new_node)
+        else:
+            temp_node = self.__getitem__(item_index)
+            temp_node.next_node = new_node
+            new_node.next_node = temp_node.next_node.next_node
+            new_node.pre_node = temp_node
+            new_node.next_node.pre_node = new_node
+        self.__length += 1
+
+    def remove(self, item_index):
+        if item_index == 0:
+            self.pop()
+        elif item_index == self.__length - 1:
+            temp_node = self.__last_node.pre_node
+            temp_node.next_node = None
+            self.__last_node.pre_node = None
+            self.__last_node = temp_node
+            self.__length -= 1
+        else:
+            temp_node = self.__getitem__(item_index)
+            temp_node.pre_node.next_node = temp_node.next_node
+            temp_node.next_node.pre_node = temp_node.pre_node
+            temp_node.next_node = None
+            temp_node.pre_node = None
+            self.__length -= 1
+
+    def extend(self, other_list):
+        self.__last_node.next_node = other_list.first_node
+        other_list.first_node.pre_node = self.__last_node
+        self.__last_node = other_list.last_node
 
     def __iter__(self):
         return self
@@ -85,12 +129,18 @@ class DoubleList(object):
     def __next__(self):
         pass
 
-    def __getitem__(self, item):
-        pass
+    def __getitem__(self, item_index):
+        if item_index >= self.__length:
+            raise EOFError
+        result_node = self.__first_node
+        for i in range(self.__length):
+            if i == item_index:
+                break
+            result_node = result_node.next_node
+        return result_node
 
     def __setitem__(self, key, value):
         pass
-
 
     def __len__(self):
         return self.__length
