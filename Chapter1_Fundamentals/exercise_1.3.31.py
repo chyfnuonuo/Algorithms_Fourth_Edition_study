@@ -16,11 +16,11 @@ class DoubleNode(object):
 
     @property
     def item_value(self):
-        return self.item_value
+        return self.__item_value
 
     @property
     def pre_node(self):
-        return self.pre_node
+        return self.__pre_node
 
     @pre_node.setter
     def pre_node(self, other_node):
@@ -30,7 +30,7 @@ class DoubleNode(object):
 
     @property
     def next_node(self):
-        return self.pre_node
+        return self.__next_node
 
     @next_node.setter
     def next_node(self, other_node):
@@ -59,7 +59,7 @@ class DoubleList(object):
 
     def append(self, new_node):
         if self.__first_node is None:
-            self.__first_node.next_node = new_node
+            self.__first_node = new_node
             self.__last_node = new_node
         else:
             self.__last_node.next_node = new_node
@@ -83,7 +83,10 @@ class DoubleList(object):
         else:
             result = self.__first_node
             self.__first_node = self.__first_node.next_node
-            self.__first_node.pre_node = None
+            if self.__first_node is not None:
+                self.__first_node.pre_node = None
+            else:
+                self.__last_node = None
             result.next_node = None
         self.__length -= 1
         return result
@@ -147,4 +150,20 @@ class DoubleList(object):
 
 
 if __name__ == '__main__':
-    pass
+    double_list = DoubleList()
+    double_list.append(DoubleNode(1))
+    double_list.append(DoubleNode(2))
+    double_list.append(DoubleNode(3))
+    double_list.append(DoubleNode(4))
+    print(double_list.pop().item_value)
+    print(double_list.pop().item_value)
+    print(double_list.pop().item_value)
+    print(double_list.pop().item_value)
+    double_list.push(DoubleNode(1))
+    double_list.push(DoubleNode(2))
+    double_list.push(DoubleNode(3))
+    double_list.push(DoubleNode(4))
+    print(double_list.pop().item_value)
+    print(double_list.pop().item_value)
+    print(double_list.pop().item_value)
+    print(double_list.pop().item_value)
