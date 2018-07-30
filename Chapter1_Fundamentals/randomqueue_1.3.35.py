@@ -30,6 +30,18 @@ class RandomQueue(object):
         item_index = random.randint(0, len(self.__list) - 1)
         return self.__list[item_index]
 
+    def __iter__(self):
+        self.__start_index = 0
+        random.shuffle(self.__list)
+        return self
+
+    def __next__(self):
+        if self.__start_index == len(self.__list):
+            raise StopIteration
+        result = self.__list[self.__start_index]
+        self.__start_index += 1
+        return result
+
 
 if __name__ == '__main__':
     pass
