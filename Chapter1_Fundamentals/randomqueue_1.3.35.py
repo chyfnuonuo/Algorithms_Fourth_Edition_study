@@ -5,6 +5,7 @@
 # @Email   : chengyoufu@163.com
 # @File    : randomqueue_1.3.35.py
 # @Software: PyCharm
+import copy
 import random
 
 
@@ -32,16 +33,29 @@ class RandomQueue(object):
 
     def __iter__(self):
         self.__start_index = 0
-        random.shuffle(self.__list)
+        self.__iter_list = copy.deepcopy(self.__list)
+        random.shuffle(self.__iter_list)
         return self
 
     def __next__(self):
-        if self.__start_index == len(self.__list):
+        if self.__start_index == len(self.__iter_list):
             raise StopIteration
-        result = self.__list[self.__start_index]
+        result = self.__iter_list[self.__start_index]
         self.__start_index += 1
         return result
 
 
 if __name__ == '__main__':
-    pass
+    random_list = RandomQueue()
+    random_list.enqueue(1)
+    random_list.enqueue(2)
+    random_list.enqueue(3)
+    random_list.enqueue(4)
+    random_list.enqueue(5)
+    random_list.enqueue(6)
+    for i in random_list:
+        print(i)
+    for i in random_list:
+        print(i)
+
+
