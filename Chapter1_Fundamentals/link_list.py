@@ -150,7 +150,7 @@ class LinkList(object):
         self.__iter_modify_flag = False
 
     def __next__(self):
-        if self.__iter_modify_flag:
+        if self.__iter_modify_flag:  # exercise 1.3.50
             raise Exception('List is modified in iterator')
         if self.__iter_node:
             temp_node = self.__iter_node

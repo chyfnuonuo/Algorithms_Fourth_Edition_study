@@ -3,7 +3,7 @@
 # @Time    : 2018/7/27 23:29
 # @Author  : leo cheng
 # @Email   : chengyoufu@163.com
-# @File    : circle_list_1.3.29.py
+# @File    : circle_list.py
 # @Software: PyCharm
 from Chapter1_Fundamentals.link_list import Node
 from common.func_utils import type_check_deco
