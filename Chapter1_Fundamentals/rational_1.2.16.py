@@ -3,7 +3,7 @@
 # @Time    : 2018/7/22 22:12
 # @Author  : leo cheng
 # @Email   : chengyoufu@163.com
-# @File    : exercise_1.2.16.py
+# @File    : rational_1.2.16.py
 # @Software: PyCharm
 from math import gcd
 
