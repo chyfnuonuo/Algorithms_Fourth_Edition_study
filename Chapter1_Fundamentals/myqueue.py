@@ -8,7 +8,7 @@
 from Chapter1_Fundamentals.link_list import LinkList, Node
 
 
-class Queue(object):
+class MyQueue(object):
 
     def __init__(self):
         self.__list = []

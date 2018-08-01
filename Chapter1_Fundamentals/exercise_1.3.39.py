@@ -5,7 +5,11 @@
 # @Email   : chengyoufu@163.com
 # @File    : exercise_1.3.39.py
 # @Software: PyCharm
+import os
+import random
 import threading
+import time
+from multiprocessing import Process, Queue
 
 from Chapter1_Fundamentals.circle_list import CircleList
 from Chapter1_Fundamentals.link_list import Node
@@ -23,9 +27,9 @@ class RingBuffer(object):
         return len(self.__data) == self.__buffer_length
 
     def is_empty(self):
-        return len(self.__data == 0)
+        return len(self.__data) == 0
 
-    def enqueue(self, item, timeout=None):
+    def put(self, item, timeout=None):
         if self.__con.acquire():
             while self.is_full():
                 self.__con.wait(timeout)
@@ -33,7 +37,7 @@ class RingBuffer(object):
             self.__con.notify()
             self.__con.release()
 
-    def dequeue(self):
+    def get(self):
         if self.__con.acquire():
             while self.is_empty():
                 self.__con.wait()
@@ -43,8 +47,29 @@ class RingBuffer(object):
         return result
 
 
+def write_queue(q):
+    print('process {0} to write...'.format(os.getpid()))
+    for value in range(10):
+        print('put {0} to queue'.format(value))
+        q.put(value)
+        time.sleep(random.random())
 
+
+def read_queue(q):
+    print('process {0} to read...'.format(os.getpid()))
+    while True:
+        value = q.get()
+        print('get {0} from queue'.format(value))
 
 
 if __name__ == '__main__':
-    pass
+    que = RingBuffer()
+    pw = Process(target=write_queue,args=(que,))
+    pr = Process(target=read_queue,args=(que,))
+    pw.start()
+    pr.start()
+    pw.join()
+    pr.join()
+    pr.terminate()
+    # write_queue(que)
+    # read_queue(que)

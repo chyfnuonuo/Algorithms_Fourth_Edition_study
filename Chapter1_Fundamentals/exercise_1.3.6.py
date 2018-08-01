@@ -5,7 +5,7 @@
 # @Email   : chengyoufu@163.com
 # @File    : exercise_1.3.6.py
 # @Software: PyCharm
-from Chapter1_Fundamentals.queue import QueueUseLink
+from Chapter1_Fundamentals.myqueue import QueueUseLink
 from Chapter1_Fundamentals.stack import Stack
 
 
