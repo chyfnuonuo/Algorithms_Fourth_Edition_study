@@ -56,7 +56,7 @@ class RingBufferTest(object):
         print('process {0} to write...'.format(threading.current_thread().getName()))
         for value in range(10):
             print('put {0} to queue'.format(value))
-            self.__buffer.put(value, timeout=60)
+            self.__buffer.put(value, timeout=15)
             time.sleep(random.random() * 10)
 
     def consumer(self):
