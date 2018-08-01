@@ -13,7 +13,7 @@ from Chapter1_Fundamentals.link_list import Node
 
 class RingBuffer(object):
 
-    def __init__(self, buffer_length=100):
+    def __init__(self, buffer_length=-1):
         self.__buffer_length = buffer_length
         self.__data = CircleList()
         self.__lock = threading.Lock()
@@ -41,6 +41,9 @@ class RingBuffer(object):
             self.__con.notify()
             self.__con.release()
         return result
+
+
+
 
 
 if __name__ == '__main__':
