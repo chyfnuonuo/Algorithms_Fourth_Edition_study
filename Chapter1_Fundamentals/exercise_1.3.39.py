@@ -5,7 +5,6 @@
 # @Email   : chengyoufu@163.com
 # @File    : exercise_1.3.39.py
 # @Software: PyCharm
-import os
 import random
 import threading
 import time
@@ -48,29 +47,33 @@ class RingBuffer(object):
         return result
 
 
-def write_queue(q):
-    print('process {0} to write...'.format(os.getpid()))
-    for value in range(10):
-        print('put {0} to queue'.format(value))
-        q.put(value, timeout=60)
-        time.sleep(random.random())
+class RingBufferTest(object):
 
+    def __init__(self):
+        self.__buffer = RingBuffer()
 
-def read_queue(q):
-    print('process {0} to read...'.format(os.getpid()))
-    while True:
-        value = q.get(timeout=60)
-        print('get {0} from queue'.format(value))
+    def producer(self):
+        print('process {0} to write...'.format(threading.current_thread().getName()))
+        for value in range(10):
+            print('put {0} to queue'.format(value))
+            self.__buffer.put(value, timeout=60)
+            time.sleep(random.random() * 10)
+
+    def consumer(self):
+        print('process {0} to read...'.format(threading.current_thread().getName()))
+        while True:
+            value = self.__buffer.get(timeout=60)
+            print('get {0} from queue'.format(value))
+
+    def run(self):
+        pw = threading.Thread(target=self.consumer, name='consumer')
+        pr = threading.Thread(target=self.producer, name='producer')
+        pw.start()
+        pr.start()
+        pw.join()
+        pr.join()
 
 
 if __name__ == '__main__':
-    que = RingBuffer()
-    # pw = Process(target=write_queue,args=(que,))
-    # pr = Process(target=read_queue,args=(que,))
-    # pw.start()
-    # pr.start()
-    # pw.join()
-    # pr.join()
-    # pr.terminate()
-    write_queue(que)
-    read_queue(que)
+    test = RingBufferTest()
+    test.run()
