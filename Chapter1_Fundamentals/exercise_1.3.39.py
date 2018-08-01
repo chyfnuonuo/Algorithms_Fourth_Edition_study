@@ -32,15 +32,17 @@ class RingBuffer(object):
     def put(self, item, timeout=None):
         if self.__con.acquire():
             while self.is_full():
-                self.__con.wait(timeout)
+                if not self.__con.wait(timeout):
+                    raise TimeoutError
             self.__data.enqueue(Node(item))
             self.__con.notify()
             self.__con.release()
 
-    def get(self):
+    def get(self,timeout=None):
         if self.__con.acquire():
             while self.is_empty():
-                self.__con.wait()
+                if not self.__con.wait(timeout):
+                    raise TimeoutError
             result = self.__data.dequeue().item_value
             self.__con.notify()
             self.__con.release()
@@ -51,25 +53,25 @@ def write_queue(q):
     print('process {0} to write...'.format(os.getpid()))
     for value in range(10):
         print('put {0} to queue'.format(value))
-        q.put(value)
+        q.put(value,timeout=60)
         time.sleep(random.random())
 
 
 def read_queue(q):
     print('process {0} to read...'.format(os.getpid()))
     while True:
-        value = q.get()
+        value = q.get(timeout=60)
         print('get {0} from queue'.format(value))
 
 
 if __name__ == '__main__':
     que = RingBuffer()
-    pw = Process(target=write_queue,args=(que,))
-    pr = Process(target=read_queue,args=(que,))
-    pw.start()
-    pr.start()
-    pw.join()
-    pr.join()
-    pr.terminate()
-    # write_queue(que)
-    # read_queue(que)
+    # pw = Process(target=write_queue,args=(que,))
+    # pr = Process(target=read_queue,args=(que,))
+    # pw.start()
+    # pr.start()
+    # pw.join()
+    # pr.join()
+    # pr.terminate()
+    write_queue(que)
+    read_queue(que)
