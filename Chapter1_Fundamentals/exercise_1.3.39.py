@@ -9,7 +9,6 @@ import os
 import random
 import threading
 import time
-from multiprocessing import Process, Queue
 
 from Chapter1_Fundamentals.circle_list import CircleList
 from Chapter1_Fundamentals.link_list import Node
@@ -38,7 +37,7 @@ class RingBuffer(object):
             self.__con.notify()
             self.__con.release()
 
-    def get(self,timeout=None):
+    def get(self, timeout=None):
         if self.__con.acquire():
             while self.is_empty():
                 if not self.__con.wait(timeout):
@@ -53,7 +52,7 @@ def write_queue(q):
     print('process {0} to write...'.format(os.getpid()))
     for value in range(10):
         print('put {0} to queue'.format(value))
-        q.put(value,timeout=60)
+        q.put(value, timeout=60)
         time.sleep(random.random())
 
 

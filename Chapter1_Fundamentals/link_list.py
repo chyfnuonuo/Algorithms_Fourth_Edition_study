@@ -133,7 +133,7 @@ class LinkList(object):
         self.__length = item_index + 1
         self.__iter_modify_flag = True
 
-    def extend(self, other_link_list):
+    def extend(self, other_link_list):  # exercise 1.3.47
         if not isinstance(other_link_list, LinkList):
             raise TypeError
         self.__last_node.next_node = other_link_list.__first_node
