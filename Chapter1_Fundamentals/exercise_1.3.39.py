@@ -53,17 +53,17 @@ class RingBufferTest(object):
         self.__buffer = RingBuffer()
 
     def producer(self):
-        print('process {0} to write...'.format(threading.current_thread().getName()))
+        print('process {} to write...'.format(threading.current_thread().getName()))
         for value in range(10):
-            print('put {0} to queue'.format(value))
+            print('put {} to queue...'.format(value))
             self.__buffer.put(value, timeout=15)
             time.sleep(random.random() * 10)
 
     def consumer(self):
-        print('process {0} to read...'.format(threading.current_thread().getName()))
+        print('process {} to read...'.format(threading.current_thread().getName()))
         while True:
-            value = self.__buffer.get(timeout=60)
-            print('get {0} from queue'.format(value))
+            value = self.__buffer.get(timeout=15)
+            print('get {} from queue...'.format(value))
 
     def run(self):
         pw = threading.Thread(target=self.consumer, name='consumer')
