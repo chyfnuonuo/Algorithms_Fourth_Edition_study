@@ -29,7 +29,7 @@ def time_elapsed_deco(func):
         result = func(*args, **kwargs)
         end_time = time.time()
         msecs = (end_time - start_time)
-        print("{0}>>elapsed time:{1} ms".format(func.__name__,msecs))
+        print("{0}>>elapsed time:{1} ms".format(func.__name__, msecs))
         return result
 
     return wrapper
