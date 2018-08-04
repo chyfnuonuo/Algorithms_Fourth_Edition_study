@@ -5,7 +5,7 @@
 # @Email   : chengyoufu@163.com
 # @File    : stack.py
 # @Software: PyCharm
-from Chapter1_Fundamentals.link_list import LinkList, Node
+from Chapter1_Fundamentals.bagqueuestack.link_list import LinkList, Node
 
 
 class Stack(object):

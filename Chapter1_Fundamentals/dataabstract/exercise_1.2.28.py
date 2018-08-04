@@ -5,7 +5,7 @@
 # @Email   : chengyoufu@163.com
 # @File    : exercise_1.2.28.py
 # @Software: PyCharm
-from Chapter1_Fundamentals.link_list import LinkList, Node
+from Chapter1_Fundamentals.bagqueuestack.link_list import LinkList, Node
 
 
 def max(node):

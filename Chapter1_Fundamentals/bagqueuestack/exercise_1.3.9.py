@@ -5,7 +5,7 @@
 # @Email   : chengyoufu@163.com
 # @File    : exercise_1.3.9.py
 # @Software: PyCharm
-from Chapter1_Fundamentals.stack import Stack
+from Chapter1_Fundamentals.bagqueuestack.stack import Stack
 
 
 def spit_num(expr):

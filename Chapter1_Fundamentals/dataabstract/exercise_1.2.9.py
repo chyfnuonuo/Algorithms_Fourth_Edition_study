@@ -5,7 +5,7 @@
 # @Email   : chengyoufu@163.com
 # @File    : exercise_1.2.9.py
 # @Software: PyCharm
-from Chapter1_Fundamentals.counter import Counter
+from Chapter1_Fundamentals.dataabstract.counter import Counter
 from common.time_utils import time_elapsed_deco
 
 

@@ -5,7 +5,7 @@
 # @Email   : chengyoufu@163.com
 # @File    : circle_list.py
 # @Software: PyCharm
-from Chapter1_Fundamentals.link_list import Node
+from Chapter1_Fundamentals.bagqueuestack.link_list import Node
 from common.func_utils import type_check_deco
 
 

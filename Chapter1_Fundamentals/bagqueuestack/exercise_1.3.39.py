@@ -9,8 +9,8 @@ import random
 import threading
 import time
 
-from Chapter1_Fundamentals.circle_list import CircleList
-from Chapter1_Fundamentals.link_list import Node
+from Chapter1_Fundamentals.bagqueuestack.circle_list import CircleList
+from Chapter1_Fundamentals.bagqueuestack.link_list import Node
 
 
 class RingBuffer(object):
