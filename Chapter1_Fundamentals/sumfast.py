@@ -6,7 +6,7 @@ __author__ = 'cheng'
 __mtime__ = '2018/5/12'
 __contact__ = 'chengyoufu@gmail.com'
 """
-from Chapter1_Fundamentals import binary_search
+from Chapter1_Fundamentals.basicprogram import binary_search
 
 
 def sum2count(oper_list):
