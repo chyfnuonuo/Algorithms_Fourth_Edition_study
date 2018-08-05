@@ -6,7 +6,9 @@
 # @File    : list_performance.py
 # @Software: PyCharm
 from timeit import Timer
+
 import matplotlib.pyplot as plt
+
 
 def test1():
     list_data = []
@@ -28,11 +30,9 @@ def test4():
     list_data = list(range(1000))
 
 
-def show_fig(self):
-    x = range(self.__data_num)
-    plt.scatter(x, self.data_list)
-    z = [sum(self.data_list) / self.__data_num] * self.__data_num
-    plt.plot(x, z, label="$mean value$", color="red", linewidth=2)
+def show_fig(x,*data):
+    plt.plot(x, data[0],label="$mean value$", color="red", linewidth=2)
+    plt.plot(x, data[1], label="$mean value$", color="red", linewidth=2)
     plt.show()
 
 
@@ -54,9 +54,17 @@ if __name__ == '__main__':
 
     pop_zero = Timer('list_data.pop(0)', 'from __main__ import list_data')
     pop_end = Timer('list_data.pop()', 'from __main__ import list_data')
-    for i in range(1000000, 100000001, 1000000):
+
+    y=[]
+    z=[]
+    for i in range(1000000, 10000001, 1000000):
         list_data = list(range(i))
         pt = pop_end.timeit(number=1000)
         list_data = list(range(i))
         pz = pop_zero.timeit(number=1000)
-        print("%15.5f,	%15.5f" % (pz, pt))
+        print(pt)
+        print(pz)
+        y.append(pt)
+        z.append(pz)
+    x = list(range(len(y)))
+    show_fig(x,(y,z))
