@@ -6,6 +6,7 @@
 # @File    : exercise_1.3.5.py
 # @Software: PyCharm
 from Chapter1_Fundamentals.bagqueuestack.link_list import LinkList, Node
+from Chapter1_Fundamentals.bagqueuestack.stack import Stack
 
 
 def convert_binary(num):
@@ -24,7 +25,21 @@ def convert_binary(num):
     return result
 
 
+def convert(num, base=2):
+    stack = Stack()
+    while num > 0:
+        stack.push(num % base)
+        num = num // base
+    result = 0
+    while not stack.is_empty():
+        result = result * 10 + stack.pop()
+    return result
+
+
 if __name__ == '__main__':
     print(convert_binary(50))
     print(convert_binary(4))
     print(convert_binary(2))
+    print(convert(2))
+    print(convert(15))
+    print(convert(16,8))
