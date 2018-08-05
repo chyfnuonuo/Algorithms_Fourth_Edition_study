@@ -15,24 +15,25 @@ def convert_binary(num):
     :param num: 需要转换的数字
     :return:
     """
-    stack = LinkList()
+    stack = Stack()
     while num > 0:
-        stack.push(Node(num % 2))
+        stack.push(num % 2)
         num = num // 2
     result = 0
-    for node in stack:
-        result = result * 10 + node.item_value
+    while not stack.is_empty():
+        result = result * 10 + stack.pop()
     return result
 
 
 def convert(num, base=2):
+    digits = '0123456789ABCDEF'
     stack = Stack()
     while num > 0:
         stack.push(num % base)
         num = num // base
-    result = 0
+    result = ''
     while not stack.is_empty():
-        result = result * 10 + stack.pop()
+        result = result + digits[stack.pop()]
     return result
 
 
@@ -42,4 +43,5 @@ if __name__ == '__main__':
     print(convert_binary(2))
     print(convert(2))
     print(convert(15))
-    print(convert(16,8))
+    print(convert(16, base=16))
+    print(convert(63524, base=16))
