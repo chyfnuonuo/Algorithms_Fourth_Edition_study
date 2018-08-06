@@ -29,11 +29,16 @@ def spit_num(expr):
 
         if item.isdigit() or item == '.':
             temp += item
-        else:
+        elif is_operator(item):
             if len(temp) != 0:
                 result_list.append(temp)
                 temp = ''
             result_list.append(item)
+        else:
+            if len(temp) != 0:
+                result_list.append(temp)
+                temp = ''
+            continue
     if len(temp) != 0:
         result_list.append(temp)
     return result_list
@@ -45,6 +50,17 @@ def is_operator(item):
     return False
 
 
+def cal(operator1, operator2, item):
+    if item == '+':
+        return operator1 + operator2
+    elif item == '-':
+        return operator1 - operator2
+    elif item == '*':
+        return operator1 * operator2
+    else:
+        return operator1 / operator2
+
+
 def evaluate_postfix(expr):
     expr_list = spit_num(expr)
     stack = Stack()
@@ -52,18 +68,10 @@ def evaluate_postfix(expr):
         if is_num(item):
             stack.push(item)
         elif is_operator(item):
-            if item == '+':
-                stack.push(float(stack.pop()) + float(stack.pop()))
-            elif item == '-':
-                subtrahend = stack.pop()
-                minuend = stack.pop()
-                stack.push(float(minuend) - float(subtrahend))
-            elif item == '*':
-                stack.push(float(stack.pop()) * float(stack.pop()))
-            else:
-                divisor = stack.pop()
-                dividend = stack.pop()
-                stack.push(float(dividend) / float(divisor))
+            operator2 = stack.pop()
+            operator1 = stack.pop()
+            result = cal(float(operator1), float(operator2), item)
+            stack.push(result)
         else:
             raise ValueError
     return stack.pop()
