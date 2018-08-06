@@ -6,28 +6,26 @@
 # @File    : exercise_1.3.37.py
 # @Software: PyCharm
 
+from Chapter1_Fundamentals.bagqueuestack.myqueue import MyQueue
 
-def init_list(n):
-    result_list = []
+
+def init_queue(n):
+    result_queue = MyQueue()
     for i in range(n):
-        result_list.append(i)
-    return result_list
+        result_queue.enqueue(i)
+    return result_queue
 
 
 def josephus(n, m):
-    people_list = init_list(n)
+    people_queue = init_queue(n)
     result_order = []
-    while True:
-        people_num = len(people_list)
-        if people_num == 1:
-            break
-        else:
-            pick_index = m % people_num
-            result_order.append(people_list[pick_index])
-            del people_list[pick_index]
+    while len(people_queue) > 1:
+        for i in range(m - 1):
+            people_queue.enqueue(people_queue.dequeue())
+        result_order.append(people_queue.dequeue())
     return result_order
 
 
 if __name__ == '__main__':
-    print(josephus(7, 10))
+    print(josephus(7, 3))
     print(josephus(10, 4))
