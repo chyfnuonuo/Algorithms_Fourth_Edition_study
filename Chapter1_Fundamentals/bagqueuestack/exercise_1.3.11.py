@@ -26,7 +26,6 @@ def spit_num(expr):
     result_list = []
     temp = ''
     for item in expr:
-
         if item.isdigit() or item == '.':
             temp += item
         elif is_operator(item):
@@ -38,7 +37,6 @@ def spit_num(expr):
             if len(temp) != 0:
                 result_list.append(temp)
                 temp = ''
-            continue
     if len(temp) != 0:
         result_list.append(temp)
     return result_list
