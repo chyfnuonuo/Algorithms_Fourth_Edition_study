@@ -122,9 +122,9 @@ class DoubleList(object):
             self.__length -= 1
 
     def extend(self, other_list):
-        self.__last_node.next_node = other_list.first_node
-        other_list.first_node.pre_node = self.__last_node
-        self.__last_node = other_list.last_node
+        self.__last_node.next_node = other_list.head
+        other_list.head.pre_node = self.__last_node
+        self.__last_node = other_list.tail
 
     def __iter__(self):
         return self

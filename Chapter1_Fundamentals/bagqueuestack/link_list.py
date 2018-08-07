@@ -33,22 +33,22 @@ class Node(object):
 
 class LinkList(object):
     def __init__(self):
-        self.__first_node = None
-        self.__last_node = None
+        self.__head = None
+        self.__tail = None
         self.__length = 0
-        self.__iter_node = self.__first_node
+        self.__iter_node = self.__head
         self.__iter_modify_flag = False
 
     @property
-    def first_node(self):
-        return self.first_node
+    def head(self):
+        return self.__head
 
     @property
-    def last_node(self):
-        return self.last_node
+    def tail(self):
+        return self.__tail
 
     def is_empty(self):
-        return self.__first_node is None
+        return self.__head is None
 
     @type_check_deco(object, Node)
     def append(self, new_node):
@@ -57,12 +57,12 @@ class LinkList(object):
         :param new_node:
         :return:
         """
-        if self.__first_node is None:
-            self.__first_node = new_node
-            self.__last_node = new_node
+        if self.__head is None:
+            self.__head = new_node
+            self.__tail = new_node
         else:
-            self.__last_node.next_node = new_node
-            self.__last_node = new_node
+            self.__tail.next_node = new_node
+            self.__tail = new_node
         self.__iter_modify_flag = True
         self.__length += 1
 
@@ -73,10 +73,10 @@ class LinkList(object):
         :param new_node:
         :return:
         """
-        new_node.next_node = self.__first_node
-        self.__first_node = new_node
+        new_node.next_node = self.__head
+        self.__head = new_node
         if new_node.next_node is None:
-            self.__last_node = new_node
+            self.__tail = new_node
         self.__iter_modify_flag = True
         self.__length += 1
 
@@ -85,13 +85,13 @@ class LinkList(object):
         弹出头部
         :return:
         """
-        if self.__first_node is not None:
-            temp = self.__first_node
-            self.__first_node = self.__first_node.next_node
+        if self.__head is not None:
+            temp = self.__head
+            self.__head = self.__head.next_node
             temp.next_node = None
             self.__length -= 1
-            if self.__first_node is None:
-                self.__last_node = None
+            if self.__head is None:
+                self.__tail = None
             self.__iter_modify_flag = True
             return temp
         else:
@@ -117,7 +117,7 @@ class LinkList(object):
             temp_node = self.__getitem__(item_index - 1)
             if temp_node.next_node.next_node is None:
                 temp_node.next_node = None
-                self.__last_node = temp_node
+                self.__tail = temp_node
             else:
                 remove_node = temp_node.next_node
                 temp_node.next_node = temp_node.next_node.next_node
@@ -129,24 +129,25 @@ class LinkList(object):
     def remove_after(self, item_index): # add exercise 1.3.24
         node = self.__getitem__(item_index)
         node.next_node = None
-        self.__last_node = node
+        self.__tail = node
         self.__length = item_index + 1
         self.__iter_modify_flag = True
 
     def extend(self, other_link_list):  # exercise 1.3.47
         if not isinstance(other_link_list, LinkList):
             raise TypeError
-        self.__last_node.next_node = other_link_list.__first_node
-        self.__last_node = other_link_list.__last_node
+        self.__tail.next_node = other_link_list.__head
+        self.__tail = other_link_list.__tail
         self.__iter_modify_flag = True
+        self.__length = self.__length+ len(other_link_list)
 
     def __iter__(self):
-        self.__iter_node = self.__first_node
+        self.__iter_node = self.__head
         self.__iter_modify_flag = False
         return self
 
     def reset_iter(self):
-        self.__iter_node = self.__first_node
+        self.__iter_node = self.__head
         self.__iter_modify_flag = False
 
     def __next__(self):
@@ -179,7 +180,7 @@ class LinkList(object):
     def __delitem__(self, item_index):  # exercise 1.3.20
         if item_index >= self.__length:
             raise IndexError("index {0} is out of range:[0:{1}]".format(item_index, self.__length - 1))
-        result_node = self.__first_node
+        result_node = self.__head
         for i in range(self.__length):
             if i == item_index - 1:
                 break
@@ -191,7 +192,7 @@ class LinkList(object):
     def __setitem__(self, item_index, new_node):
         if item_index >= self.__length:
             item_index = self.__length
-        result_node = self.__first_node
+        result_node = self.__head
         for i in range(self.__length):
             if i == item_index:
                 break
@@ -202,7 +203,7 @@ class LinkList(object):
     def __getitem__(self, item_index):
         if item_index >= self.__length:
             raise IndexError
-        result_node = self.__first_node
+        result_node = self.__head
         for i in range(self.__length):
             if i == item_index:
                 break
