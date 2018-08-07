@@ -3,9 +3,9 @@
 # @Time    : 2018/7/29 23:15
 # @Author  : leo cheng
 # @Email   : chengyoufu@163.com
-# @File    : Deque_1.3.33.py
+# @File    : deque.py
 # @Software: PyCharm
-from Chapter1_Fundamentals.link_list import LinkList, Node
+from Chapter1_Fundamentals.bagqueuestack.link_list import LinkList, Node
 
 
 class Deque(object):
