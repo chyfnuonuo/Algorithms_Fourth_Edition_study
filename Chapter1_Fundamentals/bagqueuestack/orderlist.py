@@ -47,8 +47,23 @@ class OrderList(object):
         else:
             raise EOFError
 
-
-
+    def search(self, item):
+        current = self.__head
+        result = -1
+        found = False
+        stop = False
+        while current is not None and found is not True and stop is not True:
+            if item == current.item_value:
+                found = True
+            else:
+                if item > current.item_value:
+                    stop = True
+                else:
+                    current = current.next_node
+            result += 1
+        if not found:
+            result = -1
+        return result
 
     def __len__(self):
         return self.__length
