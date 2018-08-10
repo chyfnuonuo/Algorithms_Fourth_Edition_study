@@ -15,9 +15,14 @@ def two_sum_faster(data_list):
             temp_list[-data] = 1
         else:
             if temp_list[data] is not None:
+                temp_list[data] = None
                 result += 1
     return result
 
 
+def three_sum_faster(data_list):
+
+
+
 if __name__ == '__main__':
-    print(two_sum_faster([-8, -4, -2, 0, 1, 2, 4, 5, 8]))
+    print(two_sum_faster([-8, -4, -2, 0, 1, 2, 2, 4, 5, 8]))
