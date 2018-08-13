@@ -8,15 +8,18 @@
 
 
 def two_sum_faster(data_list):
-    temp_set = set()
+    begin = 0
+    end = len(data_list) - 1
     result = 0
-    for data in data_list:
-        if data < 0:
-            temp_set.add(data)
+    while begin < end:
+        if data_list[begin] + data_list[end] < 0:
+            begin += 1
+        elif data_list[begin] + data_list[end] > 0:
+            end -= 1
         else:
-            if -data in temp_set:
-                temp_set.remove(-data)
-                result += 1
+            begin += 1
+            end -= 1
+            result += 1
     return result
 
 
@@ -30,4 +33,4 @@ def two_sum_faster(data_list):
 
 
 if __name__ == '__main__':
-    print(two_sum_faster([-8, -4, -2, 0, 1, 2, 2, 4, 5, 18]))
+    print(two_sum_faster([-8, -4, -2, 0, 1, 2, 2, 4, 5, 8]))
