@@ -7,7 +7,7 @@
 # @Software: PyCharm
 
 
-def faster_pair(data_list):
+def faraway_pair(data_list):
     min = data_list[0]
     max = data_list[0]
     min_index = 0
@@ -24,4 +24,4 @@ def faster_pair(data_list):
 
 
 if __name__ == '__main__':
-    print(faster_pair([0.1, -2.3, 4.5, 1.2, 6.1, -1.1]))
+    print(faraway_pair([0.1, -2.3, 4.5, 1.2, 6.1, -1.1]))
