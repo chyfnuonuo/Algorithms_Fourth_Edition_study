@@ -35,3 +35,11 @@ def binary_search(search_list, search_item):
 if __name__ == '__main__':
     s_list = [1, 3, 3, 3, 3, 5, 6, 7, 8, 9]
     print(binary_search(s_list, 3))
+    s_list = [3, 3, 3, 3, 3, 5, 6, 7, 8, 9]
+    print(binary_search(s_list, 3))
+    s_list = [1, 1, 1, 1, 1, 1, 1, 1, 1, 1]
+    print(binary_search(s_list, 3))
+    s_list = [1, 1, 1, 1, 1, 1, 1, 1, 1, 1]
+    print(binary_search(s_list, 1))
+    s_list = [1, 2, 3, 4, 5, 6, 7, 7, 8, 8]
+    print(binary_search(s_list, 7))

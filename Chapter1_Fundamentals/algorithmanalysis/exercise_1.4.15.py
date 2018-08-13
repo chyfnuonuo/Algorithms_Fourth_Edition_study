@@ -8,21 +8,26 @@
 
 
 def two_sum_faster(data_list):
-    temp_list = [None] * len(data_list)
+    temp_set = set()
     result = 0
     for data in data_list:
         if data < 0:
-            temp_list[-data] = 1
+            temp_set.add(data)
         else:
-            if temp_list[data] is not None:
-                temp_list[data] = None
+            if -data in temp_set:
+                temp_set.remove(-data)
                 result += 1
     return result
 
 
-def three_sum_faster(data_list):
-
+# def three_sum_faster(data_list):
+#     temp_list = [None] * len(data_list)
+#     result = 0
+#     for index1 in data_list；
+#         for index2 in data_list[index1:]:
+#             if data_list[index1]+data_list[index2]<0:
+#                 temp_list[]
 
 
 if __name__ == '__main__':
-    print(two_sum_faster([-8, -4, -2, 0, 1, 2, 2, 4, 5, 8]))
+    print(two_sum_faster([-8, -4, -2, 0, 1, 2, 2, 4, 5, 18]))
