@@ -23,14 +23,26 @@ def two_sum_faster(data_list):
     return result
 
 
-# def three_sum_faster(data_list):
-#     temp_list = [None] * len(data_list)
-#     result = 0
-#     for index1 in data_list；
-#         for index2 in data_list[index1:]:
-#             if data_list[index1]+data_list[index2]<0:
-#                 temp_list[]
+def three_sum_faster(data_list):
+    result = 0
+    length = len(data_list)
+    index = 0
+    while index < length - 2:
+        begin = index + 1
+        end = length - 1
+        while begin < end:
+            if data_list[index] + data_list[begin] + data_list[end] < 0:
+                begin += 1
+            elif data_list[index] + data_list[begin] + data_list[end] > 0:
+                end -= 1
+            else:
+                begin += 1
+                end -= 1
+                result += 1
+        index += 1
+    return result
 
 
 if __name__ == '__main__':
     print(two_sum_faster([-8, -4, -2, 0, 1, 2, 2, 4, 5, 8]))
+    print(three_sum_faster([-8, -4, -2, 0, 1, 2, 2, 4, 5, 8]))
