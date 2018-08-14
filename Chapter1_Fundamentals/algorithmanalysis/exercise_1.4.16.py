@@ -10,7 +10,7 @@ def closein_pair(data_list):
     data_list.sort()
     result = 0
     temp = data_list[1] - data_list[0]
-    for index in range(len(data_list) - 1):
+    for index in range(len(data_list)-1):
         if data_list[index + 1] - data_list[index] < temp:
             temp = data_list[index + 1] - data_list[index]
             result = index

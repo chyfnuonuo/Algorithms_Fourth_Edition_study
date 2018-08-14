@@ -27,7 +27,7 @@ def simple_search(search_list, search_item):
 
 
 @time_elapsed_deco
-def binary_search(search_list, search_item):
+def binary_search(search_list, search_item,reverse=False):
     """
     二分查找
     :param search_list: 查找的有序列表
@@ -37,15 +37,26 @@ def binary_search(search_list, search_item):
 
     start = 0
     end = len(search_list) - 1
-    while start <= end:
-        mid = (start + end) // 2
-        guess = search_list[mid]
-        if guess > search_item:
-            end = mid - 1
-        elif guess < search_item:
-            start = mid + 1
-        else:
-            return mid
+    if not reverse:
+        while start <= end:
+            mid = (start + end) // 2
+            guess = search_list[mid]
+            if guess > search_item:
+                end = mid - 1
+            elif guess < search_item:
+                start = mid + 1
+            else:
+                return mid
+    else:
+        while start <= end:
+            mid = (start + end) // 2
+            guess = search_list[mid]
+            if guess < search_item:
+                end = mid - 1
+            elif guess > search_item:
+                start = mid + 1
+            else:
+                return mid
     return -1
 
 
