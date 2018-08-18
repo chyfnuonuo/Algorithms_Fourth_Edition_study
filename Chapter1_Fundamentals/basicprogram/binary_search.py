@@ -7,7 +7,6 @@
 # @Software: PyCharm
 import random
 
-
 from Chapter2_Sorting.quicksort import quick_sort
 from common.time_utils import time_elapsed_deco
 
@@ -27,11 +26,12 @@ def simple_search(search_list, search_item):
 
 
 @time_elapsed_deco
-def binary_search(search_list, search_item,reverse=False):
+def binary_search(search_list, search_item, reverse=False):
     """
     二分查找
     :param search_list: 查找的有序列表
     :param search_item: 需要查找的项
+    :param reverse:
     :return: 查找项所在的序列id
     """
 
@@ -112,11 +112,11 @@ def large_file_test():
         if result == -1:
             print('{0} not found'.format(item))
             result_list.append(item)
-    write_to_file(result_list,"../data/result.txt")
+    write_to_file(result_list, "../data/result.txt")
 
 
-def write_to_file(data,file):
-    with open(file,'w') as f:
+def write_to_file(data, file):
+    with open(file, 'w') as f:
         for item in data:
             f.write(item)
             f.write("\n")
