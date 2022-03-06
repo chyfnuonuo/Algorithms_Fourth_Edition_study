@@ -12,7 +12,7 @@ def type_check_deco(*check_types):
     """
 
     :param chenc_types:
-    :return:
+    :return:we
     """
 
     def check(func):
@@ -20,7 +20,7 @@ def type_check_deco(*check_types):
         def warps(*args, **kwargs):
             for param, check_type in zip(args, check_types):
                 if not isinstance(param,check_type):
-                    raise TypeError("param {0} must be {1} type".format(param, check_type))
+                    raise TypeError("param {0} must be {1} type  ".format(param, check_type))
 
             return func(*args, **kwargs)
 
